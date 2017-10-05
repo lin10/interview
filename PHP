@@ -1,1 +1,12 @@
 
+1.PHP的魔术变量都有什么？
+
+……
+
+2.前端后端的常用开发框架都有哪些？
+
+前端：(1) CSS:    Bootstrap、EasyUI
+
+     (2)JavaScript：VUE.js、angular.Js、jQuery.js。
+
+后端：thinkPHP、Yii、Laravel、swoole、workerman(当时只想到这几个)、。
