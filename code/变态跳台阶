@@ -1,0 +1,10 @@
+int jumpFloorII(int number) {
+          //1 2 4 8 16  1+8+4+2+1
+          if(number <= 0){
+              return false;
+          }else if(number == 1){
+              return 1;
+          }else{
+              return 2*jumpFloorII(number - 1);
+          }
+    }
