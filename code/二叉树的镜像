@@ -1,0 +1,37 @@
+/*
+题目：操作给定的二叉树，将其变换为源二叉树的镜像。
+
+二叉树的镜像定义：源二叉树                    	镜像二叉树
+            	    8                              8
+            	   /  \                          /  \
+            	  6   10                        10   6
+            	 / \  / \                      / \  / \
+            	5  7 9  11                      11 9 7  5
+*/      
+
+struct TreeNode {
+	int val;
+	struct TreeNode *left;
+	struct TreeNode *right;
+	TreeNode(int x) :
+			val(x), left(NULL), right(NULL) {
+	}
+};
+class Solution {
+public:
+    void Mirror(TreeNode *pRoot) {
+          TreeNode *p = pRoot;
+          TreeNode *temp = NULL;
+          if(p != NULL){
+              temp = p->left;
+              p->left = p->right;
+              p->right = temp;
+              if(p->left != NULL){
+                  Mirror(p->left);
+              }
+              if(p->right != NULL){
+                  Mirror(p->right);
+              }
+          }
+    }
+};
