@@ -1,0 +1,5 @@
+1.如何查看防火墙开放的端口号
+service iptables status
+
+2.查看防火墙特定的端口号,例如80端口的状态？
+netstat -80
