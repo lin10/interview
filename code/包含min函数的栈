@@ -1,0 +1,27 @@
+/*定义栈的数据结构，请在该类型中实现一个能够得到栈最小元素的min函数。*/
+
+class Solution {
+public:
+    /*
+       两个栈stack1和stack2,stack1存储输入的数据，stack2存储栈1的最小元素
+    */
+    stack<int> stack1,stack2;
+    void push(int value) {
+        stack1.push(value);
+        if(stack2.empty()){
+            stack2.push(value);
+        }
+        int min = stack2.top();
+        value<=min?stack2.push(value):stack2.push(min); 
+    }
+    void pop() {
+        stack1.pop();
+        stack2.pop();
+    }
+    int top() {
+        return stack1.top();
+    }
+    int min() {
+        return stack2.top();
+    }
+};
