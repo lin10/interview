@@ -23,4 +23,24 @@ public:
 };
 
 
-/****时间复杂度为O(log(N))的算法*****/
+/****时间复杂度为O(log(N))的算法,利用二分查找*****/
+int minNumberInRotateArray(vector<int> rotateArray) {
+        if(rotateArray.size() == 0)
+            return 0;
+        int high = rotateArray.size()-1;
+        int low = 0;
+        int mid;
+        while(rotateArray[low]>=rotateArray[high]){
+            if(high-low == 1){
+                mid = high;
+                break;
+            }
+            mid = (low+high)/2;
+            if(rotateArray[mid]>=rotateArray[low]){
+                low = mid;
+            }else if(rotateArray[mid]<=rotateArray[high]){
+                high = mid;
+            }
+        }
+        return rotateArray[mid];
+    }
