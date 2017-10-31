@@ -1,0 +1,40 @@
+/*
+*
+给定一个double类型的浮点数base和int类型的整数exponent。求base的exponent次方。
+*
+*/
+
+double Power(double base, int exponent) {
+        double res;
+        if(exponent >= 0){
+            res = pow(base,exponent);
+        }else{
+            res = pow(base,-exponent);
+            res = 1/res;
+        }
+        return res;
+    }
+    
+/*******************************/
+#include<iostream>
+#include<cmath>
+using namespace std;
+
+double Power(double base, int exponent) {
+        double res;
+        if(exponent >= 0){
+            res = pow(base,exponent);
+        }else{
+            res = pow(base,-exponent);
+            res = 1/res;
+        }
+        cout<<res;
+    } 
+    
+int main(){
+	double base;
+	int exponent;
+	cin>>base>>exponent;
+	Power(base,exponent);
+	return 0;
+} 
