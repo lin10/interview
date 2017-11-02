@@ -28,3 +28,11 @@ MySQL事务主要用于处理操作量大、复杂度搞的数据。
 5.事务的特性。
    原子性、稳定性、隔离性、可靠性。
 
+6.事务的处理方法
+ （1）用 BEGIN, ROLLBACK, COMMIT来实现
+     BEGIN 开始一个事务
+     ROLLBACK 事务回滚
+     COMMIT 事务确认
+ （2）直接用 SET 来改变 MySQL 的自动提交模式:
+      SET AUTOCOMMIT=0 禁止自动提交
+      SET AUTOCOMMIT=1 开启自动提交
