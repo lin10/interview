@@ -1,0 +1,32 @@
+/*
+*
+输入两棵二叉树A，B，判断B是不是A的子结构。（ps：我们约定空树不是任意一个树的子结构）
+*
+*/
+
+struct TreeNode {
+	int val;
+	struct TreeNode *left;
+	struct TreeNode *right;
+	TreeNode(int x) :
+			val(x), left(NULL), right(NULL) {
+	}
+};
+class Solution {
+public:
+    /*在A树中找跟B树根节点一致的节点*/
+    bool HasSubtree(TreeNode* p1, TreeNode* p2)
+    {
+        if(p1==NULL||p2==NULL) return false;
+           return IsSubtree(p1,p2) || HasSubtree(p1->left,p2) || HasSubtree(p1->right,p2);
+    }
+     /*判断B树是否为A树的子树*/
+    bool IsSubtree(TreeNode* p1, TreeNode* p2){
+        if(p2==NULL) return true;
+        if(p1==NULL) return false;
+
+        if(p2->val == p1->val){
+           return IsSubtree(p1->left,p2->left) && IsSubtree(p1->right,p2->right);
+        }else return false;
+    }
+};
