@@ -12,11 +12,11 @@ HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天
 因为要求连续子向量的最大和，首先可能会想到从头开始连续加，但是不要因为题目中从1开始就被误导，
 要注意最大和可能不是从头开始的，因此在求和时可以设置如果前N项和sum小于0则可以将sum的值赋值为第N+1项的值，
 每次循环都要与设置的最大值max进行比较，如果sum>max则将sum的值赋给max，最后输出max的值。
-同时要注意向量中的值可能都是负值，因此在设置max的默认值时应该尽可能小。
+同时要注意向量中的值可能都是负值，因此在设置max的默认值时应该尽可能小,最可靠的值是设置等于array[0]。
 /**code**/
  int FindGreatestSumOfSubArray(vector<int> array) {
          if(array.size() == 0)return 0;
-          int max=-1000000,sum=0;
+          int max=array[0],sum=0;
           for(int i=0; i<array.size();i++){
              if(sum <= 0){
                  sum = array[i];
