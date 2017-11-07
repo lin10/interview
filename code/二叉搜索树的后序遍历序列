@@ -1,0 +1,27 @@
+/*
+*
+输入一个整数数组，判断该数组是不是某二叉搜索树的后序遍历的结果。
+如果是则输出Yes,否则输出No。假设输入的数组的任意两个数字都互不相同。
+*
+*/
+/**idea**/
+二叉排序树倒序的最后一个值是根，并且左子树都小于右子树。
+去掉最后一个元素后，应该可以分为左右两部分left,right。
+其中left小于right，并且left小于right的后序排列最右侧的一个值。
+/**code**/
+    bool VerifySquenceOfBST(vector<int> sequence) {
+           int len = sequence.size();
+           if(len == 0)return false;
+           len = len - 1;
+           int i=0;
+           while(len >= 0){
+               while(sequence[i]<sequence[len])
+               i++;
+               while(sequence[i]>sequence[len])
+               i++;
+               if(i!=len)return false;
+               len--;
+               i=0;
+           }
+        return true;
+    }
