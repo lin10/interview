@@ -1,0 +1,48 @@
+/*
+*
+输入一个字符串,按字典序打印出该字符串中字符的所有排列。
+例如输入字符串abc,则打印出由字符a,b,c所能排列出来的所有字符串abc,acb,bac,bca,cab和cba。
+输入描述:
+输入一个字符串,长度不超过9(可能有字符重复),字符只包括大小写字母。
+*
+*/
+/**code1**/
+  在一个unordered_set内部，元素不会按任何顺序排序，
+  而是通过元素值的hash值将元素分组放置到各个槽(Bucker，也可以译为“桶”），
+  这样就能通过元素值快速访问各个对应的元素（均摊耗时为O（1））
+/****/
+ vector<string> Permutation(string str) {
+        vector<string> res;
+        method(res, 0, str);
+        return res;
+    }
+    
+    void method(vector<string> &res, int m, string str){
+        if(m == str.size()-1)
+            res.push_back(str);
+        unordered_set<char> zf;           //存储所有出现的字符
+        sort(str.begin()+m, str.end());  //保证字典顺序输出
+        for(int i=m; i<str.size(); i++){
+            if(zf.find(str[i]) == zf.end()){
+                zf.insert(str[i]);
+                swap(str[i],str[m]);
+                method(res, m+1, str);
+                swap(str[i],str[m]);  //复位
+            }
+        }
+    }
+
+/**code2**/
+调用STL的next_permutation函数
+/******/
+vector<string> Permutation(string str) {
+        vector<string> res;
+        if(str.empty())
+            return res;
+        sort(str.begin(),str.end());
+        do{
+            res.push_back(str);
+        }
+        while(next_permutation(str.begin(),str.end()));
+        return res;
+    }
