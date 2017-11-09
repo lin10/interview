@@ -1,0 +1,38 @@
+1.InnoDB和MyISAM的区别
+InnoDB和MyISAM是许多人在使用MySQL时最常用的两个表类型，这两个表类型各有优劣，视具体应用而定。基本的差别为：MyISAM类型不支持事务处理等高级处理，而InnoDB类型支持。MyISAM类型的表强调的是性能，其执行数度比InnoDB类型更快，但是不提供事务支持，而InnoDB提供事务支持以及外部键等高级数据库功能。
+　　以下是一些细节和具体实现的差别：
+　　◆1.InnoDB不支持FULLTEXT类型的索引。
+　　◆2.InnoDB 中不保存表的具体行数，也就是说，执行select count(*) from table时，InnoDB要扫描一遍整个表来计算有多少行，但是MyISAM只要简单的读出保存好的行数即可。注意的是，当count(*)语句包含 where条件时，两种表的操作是一样的。
+　　◆3.对于AUTO_INCREMENT类型的字段，InnoDB中必须包含只有该字段的索引，但是在MyISAM表中，可以和其他字段一起建立联合索引。
+　　◆4.DELETE FROM table时，InnoDB不会重新建立表，而是一行一行的删除。
+　　◆5.LOAD TABLE FROM MASTER操作对InnoDB是不起作用的，解决方法是首先把InnoDB表改成MyISAM表，导入数据后再改成InnoDB表，但是对于使用的额外的InnoDB特性(例如外键)的表不适用。
+　　另外，InnoDB表的行锁也不是绝对的，假如在执行一个SQL语句时MySQL不能确定要扫描的范围，InnoDB表同样会锁全表，例如update table set num=1 where name like “%aaa%”
+　　两种类型最主要的差别就是Innodb 支持事务处理与外键和行级锁。而MyISAM不支持.所以MyISAM往往就容易被人认为只适合在小项目中使用。
+　　作为使用MySQL的用户角度出发，Innodb和MyISAM都是比较喜欢的，
+    如果数据库平台要达到需求：99.9%的稳定性，方便的扩展性和高可用性来说的话，MyISAM绝对是首选。
+
+2.列举Mysql数据的存储引擎
+CSV、InnoDB、MyIASM、MEMORY、Aria
+
+3.MySQL的触发器。
+触发器（trigger）是个特殊的存储过程，它的执行不是由程序调用，也不是手工启动，而是由事件来触发，比如当对一个表进行操作（ insert，delete， update）时就会激活它执行。触发器经常用于加强数据的完整性约束和业务规则等。 触发器可以从 DBA_TRIGGERS ，USER_TRIGGERS 数据字典中查到。
+触发器有一个非常好的特性就是:触发器可以禁止或回滚违反引用完整性的更改，从而取消所尝试的数据修改。
+
+4.Mysql的事务
+事务简单得说是数据库操作，举个例子，店铺管理系统中删除跟这个店铺有关的所有信息（包括产品）而进行的数据操作。
+MySQL事务主要用于处理操作量大、复杂度搞的数据。
+注意：
+    需要利用InnoDB存储引擎来支持事务。
+    事务可以用来管理insert、update、delete语句。
+
+5.事务的特性。
+   原子性、稳定性、隔离性、可靠性。
+
+6.事务的处理方法
+ （1）用 BEGIN, ROLLBACK, COMMIT来实现
+     BEGIN 开始一个事务
+     ROLLBACK 事务回滚
+     COMMIT 事务确认
+ （2）直接用 SET 来改变 MySQL 的自动提交模式:
+      SET AUTOCOMMIT=0 禁止自动提交
+      SET AUTOCOMMIT=1 开启自动提交
