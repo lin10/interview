@@ -1,0 +1,21 @@
+/*
+*
+在一个字符串(1<=字符串长度<=10000，全部由字母组成)中找到第一个只出现一次的字符,并返回它的位置
+*
+*/
+/**idea**/
+第一次遍历统计字符出现的次数并存储在哈希表，第二次遍历哈希表获取第一次只出现一次的字符。
+/**code**/
+ int FirstNotRepeatingChar(string str) {
+        if(str.length() == 0)
+            return -1;
+        unsigned int hashRes[256] = {0};
+        for(int i=0; i<str.length(); ++i){
+            hashRes[str[i]]++;
+        }
+        for(int i=0; i<str.length(); ++i){
+            if(hashRes[str[i]] == 1)
+                return i;
+        }
+        return -1;
+    }
