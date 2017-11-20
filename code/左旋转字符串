@@ -1,0 +1,20 @@
+/**
+汇编语言中有一种移位指令叫做循环左移（ROL），现在有个简单的任务，就是用字符串模拟这个指令的运算结果。
+对于一个给定的字符序列S，请你把其循环左移K位后的序列输出。
+例如，字符序列S=”abcXYZdef”,要求输出循环左移3位后的结果，即“XYZdefabc”。
+**/
+/**idea**/
+采用一个辅助字符串存储结果字符序列，将字符串根据左移k位分为前后两部分，
+先遍历后半部分存入结果字符串，然后遍历前半部分存入结果字符串。
+最后将结果输出。
+/**code**/
+string LeftRotateString(string str, int n) {
+        string res;
+        for(int i=n; i<str.size(); ++i){
+            res.push_back(str[i]);
+        }
+        for(int i=0; i<=n-1; ++i){
+            res.push_back(str[i]);
+        }
+        return res;
+    }
