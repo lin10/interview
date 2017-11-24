@@ -1,0 +1,32 @@
+/**
+给定一个英文字符串,请写一段代码找出这个字符串中首先出现三次的那个英文字符。
+输入描述:
+输入数据一个字符串，包括字母,数字等。
+输出描述:
+输出首先出现三次的那个英文字符
+输入
+Have you ever gone shopping and
+输出
+e
+**/
+/**idea**/
+利用一个辅助数组存储每个字符出现的次数，注意本题中字符串包括字母和数字。
+/**code**/
+#include<iostream>
+#include<string>
+using namespace std;
+int main(){
+    string str;
+    getline(cin,str);
+    int a[10000]= {0};
+     int len = str.size();
+    for(int i=0; i<len; ++i){
+        if(str[i]>='a'&&str[i]<='z'||str[i]>='A'&&str[i]<='Z')           
+            ++a[str[i]];
+        if(a[str[i]] == 3){
+                cout<<str[i];
+                break;
+            }
+    }
+    return 0;
+}
