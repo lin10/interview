@@ -1,0 +1,24 @@
+/**
+把只包含因子2、3和5的数称作丑数（Ugly Number）。
+例如6、8都是丑数，但14不是，因为它包含因子7。
+习惯上我们把1当做是第一个丑数。求按从小到大的顺序的第N个丑数。
+**/
+/**idea**/
+1 2 3 4 5 6 8 9 10 12 15 16
+丑数 m = 2*x+3*y*5*z
+第一个丑数是1，后面的丑数是前面丑数的2倍、3倍或者5倍
+因此依次找到2倍、3倍或者5倍的数值中最小的一个存到数组中
+/**code**/
+int GetUglyNumber_Solution(int index) {
+             if(index <= 0) return 0;
+             vector<int> res(index);
+             res[0] = 1;
+             int a1=0, a2=0, a3=0;
+             for(int i=1; i<index; ++i){
+                 res[i] = min(res[a1]*2,min(res[a2]*3,res[a3]*5));
+                 if(res[i] == res[a1]*2) a1++;
+                 if(res[i] == res[a2]*3) a2++;
+                 if(res[i] == res[a3]*5) a3++;
+             }
+        return res[index-1];
+    }
