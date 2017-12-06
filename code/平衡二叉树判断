@@ -1,0 +1,28 @@
+/**
+输入一棵二叉树，判断该二叉树是否是平衡二叉树。
+**/
+/**idea**/
+平衡二叉树是一 棵空树或它的左右两个子树的高度差的绝对值不超过1，并且左右两个子树都是一棵平衡二叉树。
+通过后序遍历整个二叉树，判断每个子树的高度来判断是否平衡。
+/**code**/
+class Solution {
+public:
+    bool IsBalanced_Solution(TreeNode* pRoot) {
+         int depth = 0;
+         return IsBalanced(pRoot, depth);
+    }
+    
+    bool IsBalanced(TreeNode* pRoot,int &depth){
+        if(pRoot == NULL) return true;
+        int left=0,right=0;
+        if(IsBalanced(pRoot->left,left) && IsBalanced(pRoot->right,right)){
+            int tmp = left - right;
+            if(tmp<-1 || tmp>1){
+                return false;
+            }
+            depth = (left > right? left : right) + 1;
+            return true;
+         }
+        return false;
+    }
+};
