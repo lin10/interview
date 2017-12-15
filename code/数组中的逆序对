@@ -19,6 +19,9 @@
 7
 **/
 /**idea**/
+第一种时间复杂度为O(n^2)，直接两个循环遍历数组，找到逆序对。
+第二种时间复杂度为O(nlogn)，利用归并排序，利用递归对数组进行二等分，对分出的每一个子数组先查询逆序对的数目，
+之后再将子数组的成员按顺序排列，最后计算不同子数组之间逆序对的数目，相加得总和。
 /**时间复杂度为O(n^2)的code**/
 class Solution {
 public:
@@ -34,4 +37,42 @@ public:
         }
         return P%100000007;
     }
+};
+/**时间复杂度为O(nlogn)的code**/
+class Solution {
+public:
+    int InversePairs(vector<int> data) {
+        int len = data.size();
+        vector<int> copy;
+        for(int i=0; i<len; i++)
+            copy.push_back(data[i]);
+        long long P = InversePairsCode(data,copy,0,len-1);
+        return P%1000000007;
+    }
+    long long InversePairsCode(vector<int> &data,vector<int> &copy,int start,int end){
+        if(start == end){
+            copy[start] = data[end];
+            return 0;
+        }
+        int len = (end-start)/2;
+        long long left = InversePairsCode(copy,data,start,start+len);
+        long long right = InversePairsCode(copy,data,start+len+1,end);
+        int i=start+len;
+        int j=end;
+        int indexcopy=end;
+        long long count=0;
+        while(i>=start && j>=start+len+1){
+            if(data[i] > data[j]){
+                copy[indexcopy--] = data[i--];
+                count=count+j-start-len;
+            }else{
+                copy[indexcopy--] = data[j--];
+            }
+        }
+            for(;i>=start;i--)
+                copy[indexcopy--] = data[i];
+            for(;j>=start+len+1;j--)
+                copy[indexcopy--] = data[j];
+            return left+right+count;
+        }
 };
