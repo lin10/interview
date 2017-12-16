@@ -1,3 +1,36 @@
 /**
 输出所有和为S的连续正数序列。序列内按照从小至大的顺序，序列间按照开始数字从小到大的顺序
+例如
+续正数和为100的序列一:9,10,11,12,13,14,15,16。
+续正数和为100的序列二:18,19,20,21,22。
 **/
+/**idea**/
+low为序列中最小值，high为最大值，则 (low+high)*(high-low+1)/2=sum
+利用一大一小两个指针，遍历sum之前的所有正数，如果求得的和值小于sum，
+则指向的最大序列数加一，如果求得的和值大于sum,则指向的最小序列数减一，
+如果相等，则现在low和high之间的序列则为所求序列。
+/**code**/
+class Solution {
+public:
+    vector<vector<int> > FindContinuousSequence(int sum) {
+        vector<vector<int>> allRes;
+        int low=1,high=2;
+        while(high>low){
+            int tmp = (low+high)*(high-low+1)/2;
+            if(tmp<sum){
+                high++;
+            }
+            if(tmp == sum){
+                vector<int> res;
+                for(int i=low; i<=high; i++)
+                    res.push_back(i);
+                allRes.push_back(res);
+                low++;
+            }
+            if(tmp>sum){
+                low++;
+            }
+        }
+        return allRes;
+    }
+};
