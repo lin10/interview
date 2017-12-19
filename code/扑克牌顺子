@@ -6,4 +6,33 @@ LL今天心情特别好,因为他去买了一副扑克牌,发现里面居然有2
 上面的5张牌就可以变成“1,2,3,4,5”(大小王分别看作2和4),“So Lucky!”。LL决定去买体育彩票啦。
 现在,要求你使用这幅牌模拟上面的过程,然后告诉我们LL的运气如何。为了方便起见,你可以认为大小王是0。
 **/
+/**idea**/
+  /*
+    除去大小王，顺子中最大牌比最小牌大四。
+    */
 /**code**/
+class Solution {
+  
+public:
+    bool IsContinuous( vector<int> numbers ) {
+        int len = numbers.size();
+        if(len != 5)
+            return false;
+        sort(numbers.begin(),numbers.end());
+        int king = 0; //用于计算大小王的个数
+        for(int i=0; i<5&&numbers[i] == 0; i++){
+                king++;
+        }
+        if(king > 4)
+            return false;
+        //判断是否存在false
+        for(int i=king+1; i<5; i++){
+            if(numbers[i] == numbers[i-1])
+                return false;
+        }
+        int res = numbers[4] - numbers[king];
+        if(res <= 4)
+            return true;
+        return false;
+    }
+};
