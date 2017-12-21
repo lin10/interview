@@ -5,4 +5,20 @@
 可以不用表演,并且拿到名贵的“名侦探柯南”典藏版(名额有限哦!!^_^)。
 请你试着想下,哪个小朋友会得到这份礼品呢？(注：小朋友的编号是从0到n-1)
 **/
-/****/
+/**idea**/
+约瑟夫环
+/**code**/
+class Solution {
+public:
+    int LastRemaining_Solution(int n, int m)
+    {
+        if(n<1 || m<1){
+            return -1;
+        }
+        int luck = 0;
+        for(int i=2; i<=n; i++){
+            luck = (luck+m)%i;
+        }
+        return luck;
+    }
+};
