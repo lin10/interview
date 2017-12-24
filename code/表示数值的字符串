@@ -3,5 +3,12 @@
 例如，字符串"+100","5e2","-123","3.1416"和"-1E-16"都表示数值。
 但是"12e","1a3.14","1.2.3","+-5"和"12e+4.3"都不是
 **/
-/****/
-/**code**/
+/**idea**/
+利用正则表达式匹配
+/**code*java*/
+public class Solution {
+    public boolean isNumeric(char[] str) {
+        String string = String.valueOf(str);
+        return string.matches("[\\+-]?[0-9]*(\\.[0-9]*)?([eE][\\+-]?[0-9]+)?");
+    }
+}
