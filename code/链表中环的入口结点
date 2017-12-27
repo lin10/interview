@@ -1,0 +1,37 @@
+/**
+一个链表中包含环，请找出该链表的环的入口结点
+**/
+/**idea**/
+题意一个链表一定包含一个环，环不一定在什么位置开始。
+采用两个指针，一个在前面，另一个紧邻着这个指针在后面。
+两个指针同时向前移动，每移动一次，后面的指针的next指向NULL。
+也就是说：访问过的节点都断开，最后到达的那个节点一定是尾节点的下一个，
+也就是循环的第一个。
+这时候已经是第二次访问循环的第一节点了，第一次访问的时候我们已经让它指向了NULL，
+所以到这结束，时间复杂度为O（n）。
+/**code**/
+/*
+struct ListNode {
+    int val;
+    struct ListNode *next;
+    ListNode(int x) :
+        val(x), next(NULL) {
+    }
+};
+*/
+class Solution {
+public:
+    ListNode* EntryNodeOfLoop(ListNode* pHead)
+    {
+           if(!pHead->next) return NULL;
+           ListNode* p = pHead;
+           ListNode* h = pHead->next;
+           while(h){
+               p->next = NULL;
+               p = h;
+               h = h->next;
+           }
+               return p;
+           
+    }
+};
